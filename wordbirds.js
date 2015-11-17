@@ -1,7 +1,9 @@
 wordChallenges = new Mongo.Collection("wordChallenges");
 
+//Code that gets run in the browser
 if (Meteor.isClient) {
   Meteor.startup(function() {
+    //Subscribe to the challenges data
     Meteor.subscribe("challenges", function() {
       //Now that we have data, load the current challenge
       Session.set("dataLoaded", true);
@@ -20,13 +22,19 @@ if (Meteor.isClient) {
   //Store the current answer
   Session.setDefault("currentAnswer", "");
 
+  //Store a flag that indicates whether the data has been loaded or not.
+  //We don't want to start doing stuff with the data before it has finished loading
   Session.setDefault("dataLoaded", false);
 
+  //Helper functions for the wordgame template
   Template.wordgame.helpers({
+    //Gets the text for the difficulty of the current challenge
     challengeDifficulty: function() {
+      //Retrieve the current challenge
       var currentChallenge = getCurrentChallenge();
       var difficulty = "";
 
+      //Match the difficulty with some text
       if(currentChallenge) {
         if(currentChallenge.difficulty === 1) {
           difficulty = "1 syllable";
@@ -48,6 +56,7 @@ if (Meteor.isClient) {
     currentChallenge: function() {
       var currentChallenge = null;
 
+      //If the data has been loaded from the database, get the current challenge
       if(Session.get("dataLoaded")) {
         currentChallenge = getCurrentChallenge();
       }
@@ -58,25 +67,29 @@ if (Meteor.isClient) {
     displayCurrentChallenge: function() {
       return Session.get("gameState") !== "done";
     },
+    //Indicates whether the answer controls should be displayed
     displayAnswerControls: function () {
       return Session.get("gameState") === "answering" || Session.get("gameState") === "wronganswer"; 
     },
+    //Indicates whether the clear (aka try again) button should be displayed
     displayClearButton: function () {
       return Session.get("gameState") === "done";
     },
+    //Indicates whether the controls that appear for a correct answer are to be displayed
     displayCorrectAnswerControls: function() {
       return Session.get("gameState") === "correctanswer";
     },
+    //Indicates whether the controls that appear for a wrong answer are to be displayed
     displayWrongAnswerControls: function() {
       return Session.get("gameState") === "wronganswer";
     },
+    //Indicates whether data is still being loaded from the database
     isLoading: function() {
       return !Session.get("dataLoaded");
     }
   });
 
-
-
+  //This function attempts to answer the current challenge using the text in the text box
   function answerCurrentChallenge() {
     //Get the current answer
     var currentAnswer = Session.get("currentAnswer");
@@ -95,6 +108,7 @@ if (Meteor.isClient) {
     }
   }
 
+  //Clears the collection of answered challenges, allowing the user to try the examples again
   function clearAnsweredChallenges() {
     Session.set("answeredChallenges", []);
     Session.set("currentChallengeId", null);
@@ -104,6 +118,8 @@ if (Meteor.isClient) {
     Session.set("gameState", "answering");
   }
 
+  //Gets the current challenge. If there is no current challenge, the next challenge is retrieved
+  //from the database. If there are no more challenges to be answered, this function returns null.
   function getCurrentChallenge() {
       var currentChallenge = null;
 
@@ -112,11 +128,13 @@ if (Meteor.isClient) {
         //Get the next challenge
         currentChallenge = getNextChallenge();   
 
-        //If we have a challenge, set the ID as the current challenge
+        
         if(currentChallenge) {
+          //If we have a challenge, set the ID as the current challenge
           Session.set("currentChallengeId", currentChallenge._id);          
         }
         else {
+          //If we have no more challenges, clear the current challenge data
           Session.set("currentChallengeId", null);
           currentChallenge = null;
 
@@ -133,10 +151,12 @@ if (Meteor.isClient) {
       return currentChallenge;  
   }
 
+  //Retrieves a challenge from the database by ID
   function getChallenge(challengeId) {
     return wordChallenges.findOne({ _id: challengeId });
   }
 
+  //Retrieves the next challenge from the database that isn't in the list of answered challenges
   function getNextChallenge() {
     return wordChallenges.findOne({ _id : { $nin: Session.get("answeredChallenges") }});
   }
@@ -157,10 +177,12 @@ if (Meteor.isClient) {
     //Set the game state to answering
     Session.set("gameState", "answering");
 
-    //The next time the view want the current challenge, the next challenge will be loaded  
+    //The next time the view wants the current challenge, the next challenge will be loaded  
   }
 
+  //This function is called when the value of the answer text box is updated
   function onCurrentAnswerUpdated(event) {
+    //Set the current answer to the text in the answer text box
     Session.set("currentAnswer", event.target.value.trim().toLowerCase());
 
     //If the Enter key was pressed, the application will behave as if the Answer button was clicked
@@ -169,15 +191,18 @@ if (Meteor.isClient) {
     }
   } 
   
+  //Scrolls the page to the gameplay example part of the page
   function scrollToGame() {
     var element_to_scroll_to = $('.example-gameplay')[0];
     element_to_scroll_to.scrollIntoView();
   }
 
+  //Event handlers for the body section of the web page
   Template.body.events({
     "click #tryit": scrollToGame
   });
 
+  //Event handlers for the word game template
   Template.wordgame.events({
     "click #clearAnsweredChallengesButton": clearAnsweredChallenges,
     "click #answerButton": answerCurrentChallenge,
@@ -187,9 +212,10 @@ if (Meteor.isClient) {
   });
 }
 
+//Code that gets run on the server
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    //wordChallenges = new Mongo.Collection("wordChallenges");
+    //Lock down our data so that it is read-only for any subscribers
     wordChallenges.allow({
       insert: function() {
         return false;
@@ -202,8 +228,8 @@ if (Meteor.isServer) {
       }
     });
 
+    //Publish the challenges
     Meteor.publish("challenges", function() {
-      //wordChallenges = new Mongo.Collection("wordChallenges");
       return wordChallenges.find();
     });
   });
