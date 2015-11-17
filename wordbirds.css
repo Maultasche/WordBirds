@@ -1,0 +1,18 @@
+/* CSS declarations go here */
+
+.content {
+	margin-left: 10px;
+}
+
+.example-gameplay {
+/*	width: 500px;
+	max-width: 100%; 
+	border-style: solid; 
+	border-radius: 10px;*/ 
+	padding: 10px;
+}
+
+.clickable {
+	cursor: pointer; 
+	cursor: hand;
+}

@@ -1,0 +1,138 @@
+<head>
+  <title>Word Birds</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+</head>
+
+<body>
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70121297-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+  <!-- Banner -->
+    <section id="banner">
+      <img src="images/Word Birds Logo.png" style="max-width: 100%">
+      <div style="max-width: 800px;display: inline-block;">
+      <p>The game is simple—we give you two clues, you think of synonyms for each, BUT THEY HAVE TO RHYME. </p>
+      <p>Example: obese | feline = fat cat</p>
+
+      <p>It's more fun with a group - <span id="tryit" class="clickable">Try it!</span></p>
+      <p> There are 10 examples below, but feel free to skip a clue if the hints suck, 
+      or if you suck at the game. Good luck.</p>
+      </div>
+    </section>
+
+  <!-- One -->
+    <section id="one" class="wrapper special">
+      <div class="inner">
+          <div class="example-gameplay">
+            {{> wordgame}}
+          </div>
+      </div>
+    </section>
+
+  <!-- Two -->
+    <section id="two" class="wrapper style2 special">
+      <div class="inner narrow">
+          <p>If you think that&#8217;s fun, wait until you try the mobile app with your friends. Um, except it isn&#8217;t built yet&#8230;</p>
+
+          <p>Submit your email address and we&#8217;ll let you know as soon as it&#8217;s available!</p>
+ 
+          {{> signupform}}
+      </div>
+    </section>
+
+      <!-- Footer -->
+    <footer id="footer">
+      <div class="copyright">
+        &copy; WordBirds
+        <a href="https://www.facebook.com/Word-Birds-1074567299244291/timeline">
+          <img src="images/Facebook.png" width="24px">
+        </a>
+        <a href="https://twitter.com/WordBirdsApp">
+          <img src="images/Twitter.png" width="24px">
+        </a>
+      </div>
+    </footer>
+
+  <!-- Scripts -->
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="assets/js/main.js"></script>
+
+    <!-- SumoMe -->
+    <script src="//load.sumome.com/" data-sumo-site-id="43d0ccd931a2e0594088880f0b38d89b5d503039549d495c50d07a241491e640" async="async"></script>
+</body>
+
+<template name="wordgame">
+  {{#if isLoading}}
+    Loading...
+  {{else}}
+  	{{#if displayCurrentChallenge}}
+  		<strong>Clue: </strong>
+  		<div style="display: inline-block;">{{currentChallenge.clues.clue1}}</div>
+  	  <div style="display: inline-block;">{{currentChallenge.clues.clue2}}</div>
+      <div>
+        (Difficulty: {{challengeDifficulty}})
+      </div>
+  	{{else}}
+  		<div>That's all for now</div>
+    {{/if}}
+
+  	<p></p>
+   	{{#if displayWrongAnswerControls}}
+  		<div style="max-width:100%;">Incorrect. Hint: <i>{{currentChallenge.hint}}</i></div>
+		<p></p>
+  	{{/if}}
+  	{{#if displayAnswerControls}}
+    <div style="text-align:center">
+  		<input id="answerTextBox" type="text" style="max-width: 400px;margin:auto" value="{{answerText}}"/><br/>
+      </div>
+  		<button id="answerButton">Answer</button>
+  		<button id="skipButton">Skip</button>
+  	{{/if}}
+  	{{#if displayCorrectAnswerControls}}
+  		That's correct!<br/>
+  		<button id="nextChallengeButton">Go to the Next One</button>
+  	{{/if}}
+  	{{#if displayClearButton}}
+  		<button id="clearAnsweredChallengesButton">I want to do that again!</button>
+  	{{/if}}
+  {{/if}}
+</template>
+
+<template name="signupform">
+<!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+<form action="//wordbirds.us12.list-manage.com/subscribe/post?u=a5a309737494a3982f8f47710&amp;id=1986e0c5b0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+<div class="mc-field-group">
+  <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+</label>
+  <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+  <div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+  </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_a5a309737494a3982f8f47710_1986e0c5b0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</template>
