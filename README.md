@@ -8,3 +8,5 @@ For example:
 - sneaker | adhesive = shoe glue
 
 There was no time to create a nice mobile application in the time Startup Weekend provided, so we created a simple website at www.wordbirds.co in the span of a few hours to give people some examples of gameplay and measure interest in the game.
+
+This website was created using Meteor.js. The data that was inserted into the MongoDB database can be found in the data.json file.

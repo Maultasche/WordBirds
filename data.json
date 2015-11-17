@@ -1,0 +1,102 @@
+[
+    {
+        "_id" : "SxykwJyn7QFkfbMeX",
+        "clues" : {
+            "clue1" : "obese",
+            "clue2" : "feline"
+        },
+        "difficulty" : 1,
+        "hint" : "I hate Mondays. I love lasagna.",
+        "answer" : "fat cat"
+    },
+    {
+        "_id" : "iRRB9Ce34oM82rFwF",
+        "clues" : {
+            "clue1" : "sneaker",
+            "clue2" : "adhesive"
+        },
+        "difficulty" : 1,
+        "hint" : "This might be an actual thing.",
+        "answer" : "shoe glue"
+    },
+    {
+        "_id" : ObjectId("56478283f0165e91463fc95b"),
+        "clues" : {
+            "clue1" : "old",
+            "clue2" : "beer"
+        },
+        "difficulty" : 1,
+        "hint" : "Sierra Nevada's unpopular spinoff.",
+        "answer" : "stale ale"
+    },
+    {
+        "_id" : ObjectId("56478344f0165e91463fc95c"),
+        "clues" : {
+            "clue1" : "authentic",
+            "clue2" : "metal"
+        },
+        "difficulty" : 1,
+        "hint" : "Can't build a house with a fake McCoy.",
+        "answer" : "real steel"
+    },
+    {
+        "_id" : ObjectId("5647837ef0165e91463fc95d"),
+        "clues" : {
+            "clue1" : "dismal",
+            "clue2" : "nerd"
+        },
+        "difficulty" : 1,
+        "hint" : "Poindexter on planet Hoth",
+        "answer" : "bleak geek"
+    },
+    {
+        "_id" : ObjectId("564783b2f0165e91463fc95e"),
+        "clues" : {
+            "clue1" : "voluptuous",
+            "clue2" : "disease"
+        },
+        "difficulty" : 2,
+        "hint" : "Eat some oranges.",
+        "answer" : "curvy scurvy"
+    },
+    {
+        "_id" : ObjectId("564783def0165e91463fc95f"),
+        "clues" : {
+            "clue1" : "limp",
+            "clue2" : "chemical"
+        },
+        "difficulty" : 2,
+        "hint" : "Basically, this isn't.",
+        "answer" : "flaccid acid"
+    },
+    {
+        "_id" : ObjectId("56478447f0165e91463fc960"),
+        "clues" : {
+            "clue1" : "singing",
+            "clue2" : "high heel"
+        },
+        "difficulty" : 3,
+        "hint" : "Instant height for a tenor.",
+        "answer" : "falsetto stiletto"
+    },
+    {
+        "_id" : ObjectId("56478497f0165e91463fc961"),
+        "clues" : {
+            "clue1" : "curved",
+            "clue2" : "paint thinner"
+        },
+        "difficulty" : 3,
+        "hint" : "Take the paint off a windy road.",
+        "answer" : "serpentine turpentine"
+    },
+    {
+        "_id" : ObjectId("5647851ef0165e91463fc962"),
+        "clues" : {
+            "clue1" : "ridiculous",
+            "clue2" : "pachyderm"
+        },
+        "difficulty" : 4,
+        "hint" : "The horn is sensible, however.",
+        "answer" : "preposterous rhinoceros"
+    }
+}
